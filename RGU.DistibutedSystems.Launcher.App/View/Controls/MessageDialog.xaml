@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="RGU.DistibutedSystems.Launcher.App.View.Controls.MessageDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+             xmlns:local2 ="clr-namespace:RGU.DistributedSystems.UI.Attached;assembly=RGU.DistributedSystems.UI"
+             xmlns:viewsControls="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <local:CustomDialogHost DialogCornerRadius="{Binding DialogCornerRadius, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                            DialogOpacity="{Binding DialogOpacity, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                            CloseDialogCommand="{Binding DialogClickCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}">
+        <local:CustomDialogHost.Content>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="../Resources/ButtonLocalStyles.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/RGU.DistributedSystems.UI;component/Styles/ButtonStyles.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+                <ScrollViewer
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Style="{StaticResource ScrollViewerStyle}"
+                    local2:MyButton2AttachedProperty.ScrollColor="{Binding ScrollColor, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}">
+                    <TextBlock
+                        TextWrapping="Wrap"
+                        Text="{Binding Text, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}">
+                    </TextBlock>
+                </ScrollViewer>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Ok" Visibility="{Binding IsOkVisible, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                    Command="{Binding OkClickCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"></Button>
+                    <Button Content="Yes" Visibility="{Binding IsYesVisible, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                    Command="{Binding YesClickCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"></Button>
+                    <Button Content="No" Visibility="{Binding IsNoVisible, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                    Command="{Binding NoClickCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"></Button>
+                    <Button Content="Cancel" Visibility="{Binding IsCancelVisible, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"
+                    Command="{Binding CancelClickCommand, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MessageDialog}}}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </local:CustomDialogHost.Content>
+    </local:CustomDialogHost>
+</UserControl>

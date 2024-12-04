@@ -6,6 +6,7 @@ using RGU.DistibutedSystems.Launcher.App.Utils;
 using RGU.DistributedSystems.WPF.MVVM.Command;
 using RGU.DistributedSystems.WPF.MVVM.Navigation;
 using RGU.DistributedSystems.WPF.MVVM.ViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RGU.DistibutedSystems.Launcher.App.ViewModel.Pages;
 
@@ -105,6 +106,16 @@ internal sealed class TargetToNavigatePageViewModel:
     
     private readonly Lazy<ICommand> _addModifiableIntCommand;
 
+    private readonly Lazy<ICommand> _closeDialogCommand;
+
+    private readonly Lazy<ICommand> _okDialogCommand;
+    private readonly Lazy<ICommand> _noDialogCommand;
+    private readonly Lazy<ICommand> _yesDialogCommand;
+    private readonly Lazy<ICommand> _cancelDialogCommand;
+
+    private readonly Lazy<ICommand> _clickOnNumberCommand;
+    private readonly Lazy<ICommand> _clickOnCCommand;
+
     private ObservableCollection<ViewModelBase> _valuesToDisplay;
 
     private ObservableCollection<string> _strings;
@@ -118,6 +129,8 @@ internal sealed class TargetToNavigatePageViewModel:
     private readonly DispatcherTimer _radiusCoeffUpdater;
 
     private double _radiusCoeff;
+
+    private string _numericKeyboardString;
     
     #endregion
 
@@ -132,12 +145,22 @@ internal sealed class TargetToNavigatePageViewModel:
             base(navigationManager)
     {
         _valueToAdd = 0;
-        
+
+        _okDialogCommand = new Lazy<ICommand>(() => new RelayCommand(_ => OkDialogCommandAction()));
+        _noDialogCommand = new Lazy<ICommand>(()=> new RelayCommand(_ => NoDialogCommandAction()));
+        _yesDialogCommand = new Lazy<ICommand>(() => new RelayCommand(_ => YesDialogCommandAction()));
+        _cancelDialogCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CancelDialogCommandAction()));
+
+        _clickOnNumberCommand = new Lazy<ICommand>(() => new RelayCommand(ClickOnNumberCommandAction));
+        _clickOnCCommand = new Lazy<ICommand>(() => new RelayCommand(_=>ClickOnCCommandAction()));
+
         _navigateBackCommand = new Lazy<ICommand>(() => new RelayCommand(_ => NavigateBack()));
 
         _addStringWrapperCommand = new Lazy<ICommand>(() => new RelayCommand(_ => AddStringWrapper()));
         
         _addModifiableIntCommand = new Lazy<ICommand>(() => new RelayCommand(_ => AddModifiableInt()));
+
+        _closeDialogCommand = new Lazy<ICommand>(() => new RelayCommand(x => CloseDialogCommandAction()));
 
         ValuesToDisplay = new ObservableCollection<ViewModelBase>();
         
@@ -150,15 +173,31 @@ internal sealed class TargetToNavigatePageViewModel:
         BindMePlease = 6;
 
         RadiusCoeff = -0.15;
-        
+        NumericKeyboardString = "";
         _radiusCoeffUpdater = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Normal, (s, e) => RadiusCoeff += 0.01, Dispatcher.CurrentDispatcher);
         _radiusCoeffUpdater.Start();
     }
-    
+
     #endregion
-    
+
     #region Properties
-    
+    public ICommand ClickOnNumberCommand =>
+       _clickOnNumberCommand.Value;
+
+    public ICommand ClickOnCCommand =>
+       _clickOnCCommand.Value;
+
+    public ICommand OkDialogCommand =>
+        _okDialogCommand.Value;
+
+    public ICommand NoDialogCommand =>
+        _noDialogCommand.Value;
+
+    public ICommand YesDialogCommand =>
+        _yesDialogCommand.Value;
+
+    public ICommand CancelDialogCommand =>
+        _cancelDialogCommand.Value;
     /// <summary>
     /// 
     /// </summary>
@@ -177,9 +216,26 @@ internal sealed class TargetToNavigatePageViewModel:
     public ICommand AddModifiableIntCommand =>
         _addModifiableIntCommand.Value;
 
+    public ICommand CloseDialogCommand =>
+        _closeDialogCommand.Value;
+
     /// <summary>
     /// 
     /// </summary>
+    /// 
+
+    public string NumericKeyboardString
+    {
+        get =>
+            _numericKeyboardString;
+
+        private set
+        {
+            _numericKeyboardString = value;
+            RaisePropertyChanged(nameof(NumericKeyboardString));
+        }
+    }
+
     public ObservableCollection<StringWrapperViewModel> StringsWrappers
     {
         get =>
@@ -275,7 +331,45 @@ internal sealed class TargetToNavigatePageViewModel:
     {
         ValuesToDisplay.Add(new ModifiableIntViewModel());
     }
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void CloseDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("dialog closing initiated...");
+    }
+
+    private void OkDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked ok");
+    }
+    private void NoDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked no");
+    }
+    private void YesDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked yes");
+    }
+    private void CancelDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked cancel");
+    }
+
+    private void ClickOnNumberCommandAction(object number)
+    {
+        NumericKeyboardString += number;
+        System.Windows.MessageBox.Show(NumericKeyboardString);
+    }
+
+    private void ClickOnCCommandAction()
+    {
+        if (NumericKeyboardString.Length > 0)
+            NumericKeyboardString= NumericKeyboardString.Remove(NumericKeyboardString.Length -1 );
+        System.Windows.MessageBox.Show(NumericKeyboardString);
+    }
+
     #endregion
 
 }
