@@ -12,7 +12,7 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls;
 /// <summary>
 /// 
 /// </summary>
-public partial class Spinner:
+public partial class Spinner :
     UserControl
 {
     

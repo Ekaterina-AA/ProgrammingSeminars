@@ -5,8 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:templateSelectors="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.TemplateSelectors"
       xmlns:viewsControls="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+      xmlns:local ="clr-namespace:RGU.DistributedSystems.UI.Attached;assembly=RGU.DistributedSystems.UI"
+      xmlns:viewControls1="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+      xmlns:viewControls2="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+      xmlns:attached="clr-namespace:RGU.DistributedSystems.UI.Attached;assembly=RGU.DistributedSystems.UI"
       mc:Ignorable="d"
       FontSize="24">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ButtonLocalStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/RGU.DistributedSystems.UI;component/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -20,7 +32,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock />
         <ItemsControl Grid.Row="0"
-                      Grid.Column="1"
+                      Grid.Column="2"
                       ItemsSource="{Binding ValuesToDisplay, Mode=OneWay}">
             <ItemsControl.Resources>
                 <ResourceDictionary>
@@ -57,7 +69,7 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate-->
         </ItemsControl>
-        <Grid Grid.Row="1"
+        <!--Grid Grid.Row="1"
               Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="52*" />
@@ -71,7 +83,7 @@
                     Margin="5"
                     Content="Добавить NumericUpDown"
                     Command="{Binding AddModifiableIntCommand, Mode=OneWay}" />
-        </Grid>
+        </Grid-->
         <Button Grid.Row="2"
                 Grid.Column="1"
                 Content="Вернуться назад о__О"
@@ -85,5 +97,69 @@
                                    Direction="Clockwise"
                                    RadiusCoefficient="{Binding RadiusCoeff, Mode=OneWay}" />
         </viewsControls:AspectRatioLayoutDecorator>
+        <Button Grid.Row="2"
+        Grid.Column="0"
+        Style="{StaticResource MyButton1}"
+            Content="задание 1.1"/>
+        <Button Grid.Row="1"
+        Grid.Column="0"
+        Style="{StaticResource MyButton2}"
+                local:MyButton2AttachedProperty.ImageSource="C:/Users/79163/Documents/flowers_for_python/all_flowers/tulip.974.jpg"
+                local:MyButton2AttachedProperty.ScaleX="0.7"
+                local:MyButton2AttachedProperty.ScaleY="0.2">
+        </Button>
+        <ScrollViewer Grid.Row="0"
+        Grid.Column="0"
+        Style="{StaticResource ScrollViewerStyle}"
+                      local:MyButton2AttachedProperty.ScrollColor ="Aqua">
+                      <TextBlock>
+                      Однажды в студеную зимнюю пору
+                      <LineBreak />
+                      Я из лесу вышел
+                       <LineBreak />
+                       Я из лесу вышел
+                       <LineBreak />
+                       Я из лесу вышел
+                       <LineBreak />
+                       Я из лесу вышел
+                      </TextBlock>
+        </ScrollViewer>
+        <viewControls2:CustomDialogHost Grid.Row="0"
+                                        Grid.Column="1"
+                                        DialogCornerRadius="20,20,20,20" 
+                                        DialogOpacity="0.9"
+                                        CloseDialogCommand="{Binding CloseDialogCommand, Mode=OneWay}"
+                                        Content="wait  есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу вышел есу есу вышел есу вышел"
+                                        />
+        <viewControls2:MessageDialog Grid.Row="0"
+                                Grid.Column="2"
+                                DialogCornerRadius="20,20,20,20" 
+                                DialogOpacity="0.9"
+                                DialogClickCommand="{Binding CloseDialogCommand, Mode=OneWay}"
+                                OkClickCommand="{Binding OkDialogCommand, Mode=OneWay}"
+                                NoClickCommand="{Binding NoDialogCommand, Mode=OneWay}"
+                                YesClickCommand="{Binding YesDialogCommand, Mode=OneWay}"
+                                CancelClickCommand="{Binding CancelDialogCommand, Mode=OneWay}"
+                                ScrollColor="Aqua"
+                                DialogType="OkCancel"
+                                FontSize="22"
+                                Text="dkdkkd" />
+        <viewControls2:NumKeyboard Grid.Row="1"
+                                Grid.Column="2"
+                                ClickOnNumber = "{Binding ClickOnNumberCommand, Mode=OneWay}"
+                                ClickOnC="{Binding ClickOnCCommand, Mode=OneWay}"
+                                StyleOfNumberButton ="{StaticResource NumberLetterButtonStyle}"
+                                StyleOfCButton ="{StaticResource CButtonStyle}"></viewControls2:NumKeyboard>
+        <viewControls2:LetterKeyboard Grid.Row="1"
+                        Grid.Column="1"
+                        ClickOnLetter = "{Binding ClickOnLetterCommand, Mode=OneWay}"
+                        ClickOnC="{Binding ClickOnCCommand, Mode=OneWay}"
+                        StyleOfLetterButton ="{StaticResource NumberLetterButtonStyle}"
+                        StyleOfCButton ="{StaticResource CButtonStyle}"
+                        StyleOfCapsLockButton="{StaticResource CapsLockButtonStyle}"
+                        StyleOfEnterButton="{StaticResource EnterButtonStyle}"
+                        EnterButton="{Binding ClickOnEnterCommand, Mode=OneWay}"
+                        CapsLockButton="{Binding ClickOnCaplsLockCommand, Mode=OneWay}"
+                        ChangeLanguageButton ="{Binding ClickOnChangeLanguageCommand, Mode=OneWay}"></viewControls2:LetterKeyboard>
     </Grid>
 </Page>
