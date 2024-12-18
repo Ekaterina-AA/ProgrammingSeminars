@@ -22,7 +22,7 @@ internal sealed class NavigationManager
     /// <summary>
     /// 
     /// </summary>
-    private readonly Dictionary<Type, FrameworkElement> _viewTypeToViewMappings;
+    private readonly Dictionary<Type, Func<FrameworkElement>> _viewTypeToViewMappings;
 
     /// <summary>
     /// 
@@ -38,7 +38,7 @@ internal sealed class NavigationManager
     /// </summary>
     public NavigationManager()
     {
-        _viewTypeToViewMappings = new Dictionary<Type, FrameworkElement>();
+        _viewTypeToViewMappings = new Dictionary<Type, Func<FrameworkElement>>();
         _resolver = App.Container;
     }
 
@@ -77,7 +77,7 @@ internal sealed class NavigationManager
         where TViewModel:
             ViewModelBase
     {
-        _viewTypeToViewMappings.Add(typeof(TViewModel), (_resolver.Resolve(typeof(TView)) as FrameworkElement)!);
+        _viewTypeToViewMappings.Add(typeof(TViewModel), () => (_resolver.Resolve(typeof(TView)) as FrameworkElement)!);
 
         return this;
     }
@@ -92,7 +92,7 @@ internal sealed class NavigationManager
     {
         _ = _navigationService ?? throw new InvalidOperationException("Navigation service is not initialized");
 
-        if (!_viewTypeToViewMappings.TryGetValue(navigationContext.To, out var view))
+        if (!_viewTypeToViewMappings.TryGetValue(navigationContext.To, out var viewFactory))
         {
             throw new ArgumentException("View model type is not registered");
         }
@@ -105,7 +105,7 @@ internal sealed class NavigationManager
         {
             return;
         }
-        _navigationService.Navigate(view);
+        _navigationService.Navigate(viewFactory());
         from.OnNavigatedFrom(navigationContext);
         to.OnNavigatedTo(navigationContext);
     }

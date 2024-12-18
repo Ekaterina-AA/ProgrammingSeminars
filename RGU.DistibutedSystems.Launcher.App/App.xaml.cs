@@ -3,10 +3,12 @@ using DryIoc;
 using RGU.DistibutedSystems.Launcher.App.Utils;
 using RGU.DistibutedSystems.Launcher.App.View;
 using RGU.DistibutedSystems.Launcher.App.View.Controls.ControlsViewModels;
+using RGU.DistibutedSystems.Launcher.App.View.Controls.Dialogs;
 using RGU.DistibutedSystems.Launcher.App.View.Pages;
 using RGU.DistibutedSystems.Launcher.App.ViewModel;
 using RGU.DistibutedSystems.Launcher.App.ViewModel.Dialogs;
 using RGU.DistibutedSystems.Launcher.App.ViewModel.Pages;
+using RGU.DistributedSystems.WPF.MVVM.DialogAware;
 
 namespace RGU.DistibutedSystems.Launcher.App;
 
@@ -103,7 +105,7 @@ public partial class App:
     /// <returns></returns>
     private App RegisterDialogsViews()
     {
-        // TODO: 
+        Container.Register<MessageDialog>(Reuse.Transient);
 
         return this;
     }
@@ -149,7 +151,7 @@ public partial class App:
     /// <returns></returns>
     private App RegisterDialogsViewModels()
     {
-        // TODO: 
+        Container.Register<MessageDialogViewModel>(Reuse.Transient);
 
         return this;
     }
@@ -195,8 +197,9 @@ public partial class App:
     {
         var navigationManager = new NavigationManagerDialogAware();
         Container.RegisterInstance(navigationManager);
+        Container.RegisterMapping<IDialogAware, NavigationManagerDialogAware>();
 
-        navigationManager.AddMapping<, MessageDialogViewModel>;
+        navigationManager.AddMapping<MessageDialog, MessageDialogViewModel>();
 
         return this;
     }
@@ -213,7 +216,8 @@ public partial class App:
             .RegisterConfiguration()
             .RegisterViews()
             .RegisterViewModels()
-            .RegisterNavigation();
+            .RegisterNavigation()
+            .RegisterNavigationDialogAware();
 
         Container.Resolve<MainWindow>().Show();
     }

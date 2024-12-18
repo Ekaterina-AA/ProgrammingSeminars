@@ -131,7 +131,7 @@ internal sealed class TargetToNavigatePageViewModel:
 
     private double _radiusCoeff;
 
-    private readonly DialogAwareContext _dialogAwareContext;
+    private readonly IDialogAware _dialogAware;
 
     #endregion
 
@@ -143,12 +143,14 @@ internal sealed class TargetToNavigatePageViewModel:
     /// 
     /// </summary>
     /// <param name="navigationManager"></param>
+    /// <param name="dialogAware"></param>
+    /// <exception cref="ArgumentNullException"></exception>
     public TargetToNavigatePageViewModel(
         NavigationManager navigationManager,
-        DialogAwareContext dialogAwareContext):
+        IDialogAware dialogAware):
             base(navigationManager)
     {
-        _dialogAwareContext = dialogAwareContext ?? throw new ArgumentNullException(nameof(dialogAwareContext));
+        _dialogAware = dialogAware?? throw new ArgumentNullException(nameof(dialogAware));
 
         _valueToAdd = 0;
 
@@ -345,16 +347,19 @@ internal sealed class TargetToNavigatePageViewModel:
     }
     private void CancelDialogCommandAction()
     {
-        if (_dialogAwareContext.ShowDialog(DialogAwareParameters.Builder.Create()
+        if (_dialogAware.ShowDialog(DialogAwareParameters.Builder.Create()
             .ForDialogType<MessageDialogViewModel>()
             .AddParameter(MessageDialogViewModel.Parameters.YesCommand, YesDialogCommand)
             .AddParameter(MessageDialogViewModel.Parameters.NoCommand, NoDialogCommand)
+            .AddParameter(MessageDialogViewModel.Parameters.Message, "сообщенька o_O")
             .Build()))
         {
-            // TODO
+            System.Windows.MessageBox.Show("Dialog succeeded!");
         }
-
-        System.Windows.MessageBox.Show("You clicked cancel");
+        else
+        {
+            System.Windows.MessageBox.Show("Dialog failed!");
+        }
     }
     #endregion
 }

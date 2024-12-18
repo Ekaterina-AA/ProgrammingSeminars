@@ -22,6 +22,8 @@ namespace RGU.DistibutedSystems.Launcher.App.ViewModel.Dialogs
 
             public const string NoCommand = nameof(NoCommand);
 
+            public const string Message = nameof(Message);
+
         }
 
         public ICommand YesCommand

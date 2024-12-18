@@ -13,7 +13,6 @@ namespace RGU.DistibutedSystems.WPF.MVVM.DialogAware
         }
 
         private bool _dialogResult;
-        private string _message;
 
         public DialogAwareParameters Parameters
         {
@@ -23,8 +22,11 @@ namespace RGU.DistibutedSystems.WPF.MVVM.DialogAware
             }
         }
 
-        protected abstract void HandleParameters(
-            DialogAwareParameters parameters);
+        protected virtual void HandleParameters(
+            DialogAwareParameters parameters)
+        {
+
+        }
 
         public bool DialogResult
         {
@@ -33,16 +35,6 @@ namespace RGU.DistibutedSystems.WPF.MVVM.DialogAware
             {
                 _dialogResult = value;
                 RaisePropertyChanged(nameof(DialogResult));
-            }
-        }
-
-        public string Message
-        {
-            get => _message;
-            set
-            {
-                _message = value;
-                RaisePropertyChanged(nameof(Message));
             }
         }
 
