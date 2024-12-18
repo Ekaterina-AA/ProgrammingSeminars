@@ -11,6 +11,7 @@
                     Value="button content" />
         </Style.Setters>
     </Style>
+<<<<<<< HEAD
     <Style x:Key="NumberLetterButtonStyle"
            TargetType="{x:Type Button}">
         <Style.Setters>
@@ -69,6 +70,8 @@
             <Setter Property="Control.Margin" Value="1" />
         </Style.Setters>
     </Style>
+=======
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
     <Style x:Key="MyButton1"
            TargetType="{x:Type Button}">
         <Style.Setters>

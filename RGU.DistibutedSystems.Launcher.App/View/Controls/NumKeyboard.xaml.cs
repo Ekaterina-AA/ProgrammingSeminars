@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ﻿using DryIoc;
 using RGU.DistibutedSystems.Launcher.App.View.Controls.ControlsViewModels;
 using System;
+=======
+﻿using System;
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
@@ -25,10 +29,19 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls
         public class CommandViewModel
         {
             public string _content { get; set; }
+<<<<<<< HEAD
 
             public CommandViewModel(string content)
             {
                 _content = content;
+=======
+            public ICommand _command { get; set; }
+
+            public CommandViewModel(string content, ICommand command)
+            {
+                _content = content;
+                _command = command;
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
             }
         }
         public ObservableCollection<CommandViewModel> Commands { get; }
@@ -36,7 +49,22 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls
         public NumKeyboard()
         {
             InitializeComponent();
+<<<<<<< HEAD
             DataContext = App.Container.Resolve<NumKeyboardViewModel>();
+=======
+            Commands = new ObservableCollection<CommandViewModel>
+            {
+                new CommandViewModel("1", ClickOnNumber),
+                new CommandViewModel("2", ClickOnNumber),
+                new CommandViewModel("3", ClickOnNumber),
+                new CommandViewModel("4", ClickOnNumber),
+                new CommandViewModel("5", ClickOnNumber),
+                new CommandViewModel("6", ClickOnNumber),
+                new CommandViewModel("7", ClickOnNumber),
+                new CommandViewModel("8", ClickOnNumber),
+                new CommandViewModel("9", ClickOnNumber)
+            };
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
         }
 
         #region properties
@@ -74,5 +102,11 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls
         }
 
         #endregion
+<<<<<<< HEAD
+=======
+
+        #region commands
+        #endregion
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
     }
 }

@@ -116,6 +116,11 @@ internal sealed class TargetToNavigatePageViewModel:
     private readonly Lazy<ICommand> _yesDialogCommand;
     private readonly Lazy<ICommand> _cancelDialogCommand;
 
+<<<<<<< HEAD
+=======
+    private readonly Lazy<ICommand> _clickOnNumberCommand;
+    private readonly Lazy<ICommand> _clickOnCCommand;
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 
     private ObservableCollection<ViewModelBase> _valuesToDisplay;
 
@@ -131,8 +136,13 @@ internal sealed class TargetToNavigatePageViewModel:
 
     private double _radiusCoeff;
 
+<<<<<<< HEAD
     private readonly DialogAwareContext _dialogAwareContext;
 
+=======
+    private string _numericKeyboardString;
+    
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
     #endregion
 
     
@@ -157,7 +167,12 @@ internal sealed class TargetToNavigatePageViewModel:
         _yesDialogCommand = new Lazy<ICommand>(() => new RelayCommand(_ => YesDialogCommandAction()));
         _cancelDialogCommand = new Lazy<ICommand>(() => new RelayCommand(_ => CancelDialogCommandAction()));
 
+<<<<<<< HEAD
         
+=======
+        _clickOnNumberCommand = new Lazy<ICommand>(() => new RelayCommand(ClickOnNumberCommandAction));
+        _clickOnCCommand = new Lazy<ICommand>(() => new RelayCommand(_=>ClickOnCCommandAction()));
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 
         _navigateBackCommand = new Lazy<ICommand>(() => new RelayCommand(_ => NavigateBack()));
 
@@ -178,6 +193,10 @@ internal sealed class TargetToNavigatePageViewModel:
         BindMePlease = 6;
 
         RadiusCoeff = -0.15;
+<<<<<<< HEAD
+=======
+        NumericKeyboardString = "";
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
         _radiusCoeffUpdater = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Normal, (s, e) => RadiusCoeff += 0.01, Dispatcher.CurrentDispatcher);
         _radiusCoeffUpdater.Start();
     }
@@ -185,6 +204,14 @@ internal sealed class TargetToNavigatePageViewModel:
     #endregion
 
     #region Properties
+<<<<<<< HEAD
+=======
+    public ICommand ClickOnNumberCommand =>
+       _clickOnNumberCommand.Value;
+
+    public ICommand ClickOnCCommand =>
+       _clickOnCCommand.Value;
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 
     public ICommand OkDialogCommand =>
         _okDialogCommand.Value;
@@ -223,8 +250,22 @@ internal sealed class TargetToNavigatePageViewModel:
     /// </summary>
     /// 
 
+<<<<<<< HEAD
     
     
+=======
+    public string NumericKeyboardString
+    {
+        get =>
+            _numericKeyboardString;
+
+        private set
+        {
+            _numericKeyboardString = value;
+            RaisePropertyChanged(nameof(NumericKeyboardString));
+        }
+    }
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 
     public ObservableCollection<StringWrapperViewModel> StringsWrappers
     {
@@ -322,6 +363,49 @@ internal sealed class TargetToNavigatePageViewModel:
     {
         ValuesToDisplay.Add(new ModifiableIntViewModel());
     }
+<<<<<<< HEAD
+=======
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void CloseDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("dialog closing initiated...");
+    }
+
+    private void OkDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked ok");
+    }
+    private void NoDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked no");
+    }
+    private void YesDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked yes");
+    }
+    private void CancelDialogCommandAction()
+    {
+        System.Windows.MessageBox.Show("You clicked cancel");
+    }
+
+    private void ClickOnNumberCommandAction(object number)
+    {
+        NumericKeyboardString += number;
+        System.Windows.MessageBox.Show(NumericKeyboardString);
+    }
+
+    private void ClickOnCCommandAction()
+    {
+        if (NumericKeyboardString.Length > 0)
+            NumericKeyboardString= NumericKeyboardString.Remove(NumericKeyboardString.Length -1 );
+        System.Windows.MessageBox.Show(NumericKeyboardString);
+    }
+
+    #endregion
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
 
     /// <summary>
     /// 

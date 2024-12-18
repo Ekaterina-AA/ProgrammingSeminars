@@ -16,10 +16,17 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+<<<<<<< HEAD
         <Grid Grid.Row="1" 
               Grid.Column="1" Background="Black">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <ItemsControl ItemsSource="{Binding Commands}">
+=======
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <ItemsControl ItemsSource="{Binding Commands, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NumKeyboard}}}">
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" />
@@ -27,10 +34,17 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
+<<<<<<< HEAD
                             <Button Content="{Binding .}" 
                                     Command="{Binding ClickOnNumber, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NumKeyboard}}}"
                                     Style="{Binding StyleOfNumberButton, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NumKeyboard}}}"
                                     CommandParameter="{Binding Content, RelativeSource={RelativeSource Mode=Self}}">
+=======
+                            <Button Content="{Binding _content}" 
+                                    Command="{Binding _command}"
+                                    Style="{Binding StyleOfNumberButton, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:NumKeyboard}}}">
+                                <Button.CommandParameter>{Binding Content}</Button.CommandParameter>
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

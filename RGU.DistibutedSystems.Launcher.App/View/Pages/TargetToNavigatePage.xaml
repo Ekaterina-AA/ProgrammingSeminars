@@ -148,6 +148,7 @@
                                 Grid.Column="2"
                                 ClickOnNumber = "{Binding ClickOnNumberCommand, Mode=OneWay}"
                                 ClickOnC="{Binding ClickOnCCommand, Mode=OneWay}"
+<<<<<<< HEAD
                                 StyleOfNumberButton ="{StaticResource NumberLetterButtonStyle}"
                                 StyleOfCButton ="{StaticResource CButtonStyle}"></viewControls2:NumKeyboard>
         <viewControls2:LetterKeyboard Grid.Row="1"
@@ -161,5 +162,10 @@
                         EnterButton="{Binding ClickOnEnterCommand, Mode=OneWay}"
                         CapsLockButton="{Binding ClickOnCaplsLockCommand, Mode=OneWay}"
                         ChangeLanguageButton ="{Binding ClickOnChangeLanguageCommand, Mode=OneWay}"></viewControls2:LetterKeyboard>
+=======
+                                StyleOfNumberButton ="{StaticResource RedButtonLocal}"></viewControls2:NumKeyboard>
+                               
+        
+>>>>>>> 59e79b253c986baf7d84debc626f6b26bee8372f
     </Grid>
 </Page>
