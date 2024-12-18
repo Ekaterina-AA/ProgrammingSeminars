@@ -2,8 +2,10 @@
 using DryIoc;
 using RGU.DistibutedSystems.Launcher.App.Utils;
 using RGU.DistibutedSystems.Launcher.App.View;
+using RGU.DistibutedSystems.Launcher.App.View.Controls.ControlsViewModels;
 using RGU.DistibutedSystems.Launcher.App.View.Pages;
 using RGU.DistibutedSystems.Launcher.App.ViewModel;
+using RGU.DistibutedSystems.Launcher.App.ViewModel.Dialogs;
 using RGU.DistibutedSystems.Launcher.App.ViewModel.Pages;
 
 namespace RGU.DistibutedSystems.Launcher.App;
@@ -91,6 +93,7 @@ public partial class App:
         Container.Register<TargetToNavigatePage>(Reuse.Singleton);
         Container.Register<StylesDemoPage>(Reuse.Singleton);
 
+
         return this;
     }
     
@@ -150,7 +153,15 @@ public partial class App:
 
         return this;
     }
-    
+
+    private App RegisterControlsViewModels()
+    {
+        Container.Register<LetterKeyboardViewModel>(Reuse.Singleton);
+        Container.Register<NumKeyboardViewModel>(Reuse.Singleton);
+
+        return this;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -159,7 +170,8 @@ public partial class App:
     {
         return RegisterWindowsViewModels()
             .RegisterPagesViewModels()
-            .RegisterDialogsViewModels();
+            .RegisterDialogsViewModels()
+            .RegisterControlsViewModels();
     }
     
     /// <summary>
@@ -178,11 +190,21 @@ public partial class App:
 
         return this;
     }
-    
+
+    private App RegisterNavigationDialogAware()
+    {
+        var navigationManager = new NavigationManagerDialogAware();
+        Container.RegisterInstance(navigationManager);
+
+        navigationManager.AddMapping<, MessageDialogViewModel>;
+
+        return this;
+    }
+
     #endregion
-    
+
     #region System.Windows.Application overrides
-    
+
     /// <inheritdoc cref="Application.OnStartup" />
     protected override void OnStartup(
         StartupEventArgs e)
