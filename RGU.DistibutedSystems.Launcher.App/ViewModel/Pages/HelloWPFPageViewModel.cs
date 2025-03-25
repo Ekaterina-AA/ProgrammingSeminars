@@ -69,12 +69,14 @@ internal sealed class HelloWPFPageViewModel:
     /// </summary>
     private readonly Lazy<ICommand> _navigateStylesPageCommand;
 
+    private readonly Lazy<ICommand> _navigateToCompilerPageCommand;
+
     #endregion
 
     #endregion
-    
+
     #region Constructors
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -91,6 +93,7 @@ internal sealed class HelloWPFPageViewModel:
         _incrementInt = new Lazy<ICommand>(() => new RelayCommand(_ => IncrementInt(), _ => Int != 2));
         _zhmakCommand = new Lazy<ICommand>(() => new RelayCommand(_ => Zhmak()));
         _navigateStylesPageCommand = new Lazy<ICommand>(() => new RelayCommand(_ => NavigateStylesPage()));
+        _navigateToCompilerPageCommand = new Lazy<ICommand>(() => new RelayCommand(_ => NavigateToCompilerPage()));
 
         ButtonsVisibilityState = 0;
         
@@ -207,15 +210,18 @@ internal sealed class HelloWPFPageViewModel:
     /// </summary>
     public ICommand NavigateStylesPageCommand =>
         _navigateStylesPageCommand.Value;
-    
+
+    public ICommand NavigateToCompilerPageCommand =>
+       _navigateToCompilerPageCommand.Value;
+
     #endregion
-    
+
     #endregion
-    
+
     #region Methods
-    
+
     #region Command
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -264,9 +270,17 @@ internal sealed class HelloWPFPageViewModel:
             .To<StylesDemoPageViewModel>()
             .Build());
     }
-    
+
+    private void NavigateToCompilerPage()
+    {
+        NavigationManager.Navigate(NavigationContext.Builder.Create()
+            .From<HelloWPFPageViewModel>()
+            .To<CompilerViewModel>()
+            .Build());
+    }
+
     #endregion
-    
+
     #endregion
-    
+
 }

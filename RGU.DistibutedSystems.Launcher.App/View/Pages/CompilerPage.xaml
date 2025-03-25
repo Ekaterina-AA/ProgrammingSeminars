@@ -1,0 +1,53 @@
+﻿<Page x:Class="RGU.DistibutedSystems.Launcher.App.View.Pages.CompilerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Pages"
+      xmlns:local2 ="clr-namespace:RGU.DistributedSystems.UI.Attached;assembly=RGU.DistributedSystems.UI"
+      xmlns:viewControls2="clr-namespace:RGU.DistibutedSystems.Launcher.App.View.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CompilerPage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ButtonLocalStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/RGU.DistributedSystems.UI;component/Styles/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0"
+                Content="{Binding CompilerCommand, Mode=OneWay}">
+        </Button>
+        <viewControls2:NumKeyboard Grid.Row="1"
+                        ClickOnNumber = "{Binding DataContext.ClickOnNumberAction, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CompilerPage}}}"
+                        ClickOnC="{Binding DataContext.ClickOnCAction, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CompilerPage}}}"
+                        StyleOfNumberButton ="{StaticResource NumberLetterButtonStyle}"
+                        StyleOfCButton ="{StaticResource CButtonStyle}"></viewControls2:NumKeyboard>
+        <StackPanel Grid.Row="2"
+                     Orientation="Horizontal"
+                    >
+            <Button
+                Style="{StaticResource MyButton2}"
+                    local2:MyButton2AttachedProperty.ImageSource="C:/Users/79163/Downloads/play.jpg"
+                    local2:MyButton2AttachedProperty.ScaleX="1"
+                    local2:MyButton2AttachedProperty.ScaleY="1"
+                Command="{Binding ClickOnPlayAction}">
+            </Button>
+            <Button
+                    Style="{StaticResource MyButton2}"
+                        local2:MyButton2AttachedProperty.ImageSource="C:/Users/79163/Downloads/folder.jpg"
+                        local2:MyButton2AttachedProperty.ScaleX="1"
+                        local2:MyButton2AttachedProperty.ScaleY="1"
+                    Command="{Binding ClickOnPlayAction}">
+            </Button>
+    </StackPanel>
+    </Grid>
+</Page>

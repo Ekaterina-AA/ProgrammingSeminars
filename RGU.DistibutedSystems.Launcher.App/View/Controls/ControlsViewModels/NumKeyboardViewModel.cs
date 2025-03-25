@@ -18,6 +18,7 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls.ControlsViewModels
         {
             Commands = new ObservableCollection<string>
             {
+                "0",
                 "1",
                 "2",
                 "3",
@@ -26,7 +27,10 @@ namespace RGU.DistibutedSystems.Launcher.App.View.Controls.ControlsViewModels
                 "6",
                 "7",
                 "8",
-                "9"
+                "9",
+                "<",
+                ">",
+                ","
             };
             _clickOnNumberCommand = new Lazy<ICommand>(() => new RelayCommand((prop) => ClickOnNumberCommandAction((string)prop!)));
             _clickOnCCommand = new Lazy<ICommand>(() => new RelayCommand(_ => ClickOnCCommandAction()));

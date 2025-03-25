@@ -115,5 +115,12 @@
                     Content="Button :/"
                     Command="{Binding IncrementIntCommand, Mode=OneWay}" />
         </Canvas>
+        <Canvas Grid.Row="1"
+                Grid.Column="0">
+            <Button Canvas.Left="10"
+            Canvas.Top="20"
+            Content="Compiler"
+            Command="{Binding NavigateToCompilerPageCommand, Mode=OneWay}" />
+        </Canvas>
     </Grid>
 </Page>
